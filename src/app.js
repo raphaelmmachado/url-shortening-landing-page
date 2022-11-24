@@ -5,10 +5,12 @@ const button_send = document.querySelector("[data-button]");
 const alertParagraph = document.querySelector("[data-alert-paragraph]");
 const linkWrapper = document.querySelector("[data-link-wrapper]");
 const log = (element) => console.log(element);
+const savedLinks = JSON.parse(localStorage.getItem("links"));
 
-const parse = JSON.parse(localStorage.getItem("links"));
-log(parse);
 let arrayOfHtmlElements = [];
+if (savedLinks) {
+  arrayOfHtmlElements = [...savedLinks];
+}
 
 const openMobileMenu = () => {
   mobileMenu.classList.toggle("hidden");
@@ -80,38 +82,39 @@ const request = async (link) => {
   }
 };
 const append = (text, short) => {
-  if (arrayOfHtmlElements.length < 3) {
-    arrayOfHtmlElements.unshift({ text: text, short: short });
-  } else {
-    arrayOfHtmlElements.pop();
-    arrayOfHtmlElements.unshift({ text: text, short: short });
-  }
-
-  const template = arrayOfHtmlElements
-    .map((i) => {
-      return `<div class="flex flex-col justify-evenly md:flex-row
+  const template = `<div class="flex flex-col justify-evenly md:flex-row
   items-stretch md:items-center md:justify-between p-5 m-4
-   md:mx-14 rounded-md bg-neutral-gray
-    bg-opacity-30 gap-4">
-         <p class="truncate text-center md:text-end" data-link>${i.text}</p>
+   md:mx-14 rounded-md bg-slate-50 shadow-md gap-4">
+         <p class="truncate text-center md:text-end" data-link>${text}</p>
          <div class="flex md:flex-row flex-col md:items-center gap-4">
-             <p class="text-pri-cyan text-center md:text-end ">${i.short}</p>
+             <p class="text-pri-cyan text-center md:text-end ">${short}</p>
              <button class="bg-pri-cyan px-6 py-2 text-slate-50 font-semibold
               rounded-md hover:opacity-90" data-clicked="false" data-copy-button>Copy</button>
          </div>
      </div>`;
-    })
-    .join("");
 
-  saveToStorage(template);
-  linkWrapper.innerHTML = template;
+  if (arrayOfHtmlElements.length < 6) {
+    arrayOfHtmlElements.unshift(template);
+  } else {
+    arrayOfHtmlElements.pop();
+    arrayOfHtmlElements.unshift(template);
+  }
+  saveToStorage(arrayOfHtmlElements);
+  loadStorage();
   const button_copy = document.querySelectorAll("[data-copy-button]");
   button_copy.forEach((button) => {
     button.addEventListener("click", copyLink);
   });
 };
-const saveToStorage = (array) => {
-  localStorage.setItem("links", JSON.stringify(array));
+const saveToStorage = (item) => {
+  localStorage.setItem("links", JSON.stringify(item));
+};
+const loadStorage = () => {
+  const item = JSON.parse(localStorage.getItem("links"));
+  if (item) {
+    const html = item.join("");
+    linkWrapper.innerHTML = html;
+  }
 };
 const copyLink = (e) => {
   const button_copy = document.querySelectorAll("[data-copy-button]");
@@ -160,3 +163,5 @@ input.addEventListener("keypress", () =>
   resetInputOutline("outline", "outline-sec-red")
 );
 button_send.addEventListener("click", shortenLink);
+
+window.addEventListener("load", loadStorage);
