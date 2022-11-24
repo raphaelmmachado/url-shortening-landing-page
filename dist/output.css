@@ -529,6 +529,10 @@ video {
   right: 0px;
 }
 
+.top-\[-10\%\] {
+  top: -10%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -593,6 +597,10 @@ video {
 
 .mt-24 {
   margin-top: 6rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .inline {
@@ -692,6 +700,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.place-content-center {
+  place-content: center;
 }
 
 .items-start {
@@ -826,6 +838,10 @@ video {
   padding: 0.5rem;
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
 .p-6 {
   padding: 1.5rem;
 }
@@ -869,12 +885,24 @@ video {
   padding-top: 0.75rem;
 }
 
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
 .text-left {
   text-align: left;
 }
 
 .text-center {
   text-align: center;
+}
+
+.text-start {
+  text-align: start;
 }
 
 .text-lg {
@@ -905,6 +933,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-semibold {
@@ -1053,6 +1086,10 @@ a:not([class]) {
           text-decoration-skip-ink: auto;
 }
 
+a {
+  cursor: pointer;
+}
+
 /* Make images easier to work with */
 
 img,
@@ -1105,8 +1142,8 @@ select {
 }
 
 @media (min-width: 768px) {
-  .md\:left-0 {
-    left: 0px;
+  .md\:left-\[-20\%\] {
+    left: -20%;
   }
 
   .md\:top-\[30\%\] {
@@ -1147,6 +1184,10 @@ select {
     min-height: 500px;
   }
 
+  .md\:max-w-\[25\%\] {
+    max-width: 25%;
+  }
+
   .md\:rotate-90 {
     --tw-rotate: 90deg;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1164,6 +1205,10 @@ select {
     flex-direction: row-reverse;
   }
 
+  .md\:items-start {
+    align-items: flex-start;
+  }
+
   .md\:items-center {
     align-items: center;
   }
@@ -1174,6 +1219,10 @@ select {
 
   .md\:justify-around {
     justify-content: space-around;
+  }
+
+  .md\:justify-evenly {
+    justify-content: space-evenly;
   }
 
   .md\:self-start {
@@ -1192,8 +1241,20 @@ select {
     padding: 2rem;
   }
 
+  .md\:p-12 {
+    padding: 3rem;
+  }
+
+  .md\:p-10 {
+    padding: 2.5rem;
+  }
+
   .md\:pt-3 {
     padding-top: 0.75rem;
+  }
+
+  .md\:text-start {
+    text-align: start;
   }
 
   .md\:text-end {
