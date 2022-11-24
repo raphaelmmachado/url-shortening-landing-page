@@ -109,19 +109,19 @@ const request = async (link) => {
     console.log(e);
   }
 };
-const append = (text, short) => {
+const append = (currentLink, shortLink) => {
   const template = `<div class="flex flex-col justify-evenly md:flex-row
   items-stretch md:items-center md:justify-between p-5 m-4
    md:mx-14 rounded-md bg-slate-50 shadow-md gap-4">
-         <p class="truncate text-center md:text-end" data-link>${text}</p>
+         <p class="truncate text-center md:text-end" data-link>${currentLink}</p>
          <div class="flex md:flex-row flex-col md:items-center gap-4">
-             <p class="text-pri-cyan text-center md:text-end ">${short}</p>
+             <p class="text-pri-cyan text-center md:text-end ">${shortLink}</p>
              <button class="bg-pri-cyan px-6 py-2 text-slate-50 font-semibold
               rounded-md hover:opacity-90" data-clicked="false" data-copy-button>Copy</button>
          </div>
      </div>`;
 
-  if (arrayOfHtmlElements.length < 6) {
+  if (arrayOfHtmlElements.length < 5) {
     arrayOfHtmlElements.unshift(template);
   } else {
     arrayOfHtmlElements.pop();
