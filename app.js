@@ -7,45 +7,16 @@ const linkWrapper = document.querySelector("[data-link-wrapper]");
 const log = (element) => console.log(element);
 const savedLinks = JSON.parse(localStorage.getItem("links"));
 
-tailwind.config = {
-  content: ["./src/**/*.{html,js}"],
-  theme: {
-    extend: {},
-    colors: {
-      slate: {
-        50: "#f8fafc",
-        100: "#f1f5f9",
-        200: "#e2e8f0",
-        300: "#cbd5e1",
-        400: "#94a3b8",
-      },
-      pri: {
-        cyan: "hsl(180, 66%, 49%)",
-        dk_viol: "hsl(257, 27%, 26%)",
-      },
-      sec: {
-        red: "hsl(0, 87%, 67%)",
-      },
-      neutral: {
-        gray: "hsl(0, 0%, 75%)",
-        gray_vio: "hsl(257, 7%, 63%)",
-        v_dk_blue: "hsl(255, 11%, 22%)",
-        v_dk_viol: "hsl(260, 8%, 14%)",
-      },
-    },
-  },
-  plugins: [],
-};
-
+// array to store save links
 let arrayOfHtmlElements = [];
 if (savedLinks) {
   arrayOfHtmlElements = [...savedLinks];
 }
-
+// hamburger button toggle
 const openMobileMenu = () => {
   mobileMenu.classList.toggle("hidden");
 };
-
+// hide mobile menu when screen size is bigger than mobile devices
 const hideMobileMenuOnResize = () => {
   const width = window.innerWidth;
   if (width > 768) {
@@ -71,16 +42,21 @@ const checkIfInputIsEmpty = () => {
   }
   return isEmpty;
 };
+// add input border
 const addInputOutline = (outline, outlineColor) => {
   input.classList.add(outline, outlineColor);
 };
+// remove input border
 const resetInputOutline = (outline, outlineColor) => {
   input.classList.remove(outline, outlineColor);
   hideAlert(alertParagraph);
 };
+// show error
 const showAlert = (el) => el.classList.remove("hidden");
+// hide error
 const hideAlert = (el) => el.classList.add("hidden");
 
+// check if we can send link to api, then get it`s result and then render it
 const shortenLink = () => {
   let link = input.value;
 
@@ -95,10 +71,11 @@ const shortenLink = () => {
     return;
   }
   request(link)
-    .then((shortLink) => append(link, shortLink))
+    .then((shortLink) => render(link, shortLink))
     .catch((e) => console.error(e));
   input.value = "";
 };
+//send link to api
 const request = async (link) => {
   const url = `https://api.shrtco.de/v2/shorten?url=${link}`;
   try {
@@ -106,10 +83,11 @@ const request = async (link) => {
     const data = await res.json();
     return data.result.short_link;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
-const append = (currentLink, shortLink) => {
+// render
+const render = (currentLink, shortLink) => {
   const template = `<div class="flex flex-col justify-evenly md:flex-row
   items-stretch md:items-center md:justify-between p-5 m-4
    md:mx-14 rounded-md bg-slate-50 shadow-md gap-4">
@@ -134,6 +112,7 @@ const append = (currentLink, shortLink) => {
     button.addEventListener("click", copyLink);
   });
 };
+
 const saveToStorage = (item) => {
   localStorage.setItem("links", JSON.stringify(item));
 };
@@ -143,10 +122,16 @@ const loadStorage = () => {
     const html = item.join("");
     linkWrapper.innerHTML = html;
   }
-};
-const copyLink = (e) => {
   const button_copy = document.querySelectorAll("[data-copy-button]");
-  resetButtonStyle(button_copy);
+  button_copy.forEach((button) => {
+    button.addEventListener("click", copyLink);
+  });
+};
+//when click on 'copy', reset buttons that have been clicked
+//and change event target button style to 'copied'
+const copyLink = (e) => {
+  const allButtons = document.querySelectorAll("[data-copy-button]");
+  resetButtonStyle(allButtons);
   const button = e.target;
   if (() => buttonIsClicked(button)) {
     changeButtonStyle(button);
@@ -168,6 +153,7 @@ const buttonIsClicked = (button) => {
   let clicked = (button.dataset.clicked = "true");
   return Boolean(clicked);
 };
+
 const resetButtonStyle = (buttons) => {
   buttons.forEach((button) => {
     if (Boolean(button.dataset.clicked)) {
