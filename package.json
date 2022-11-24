@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  },
+  "name": "url-shortening-landing-page",
+  "description": "This is a solution to the [Shortly URL shortening API Challenge challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G). Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./styles.css -o ./dist/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rm0909/url-shortening-landing-page.git"
+  },
+  "author": "raphael machado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rm0909/url-shortening-landing-page/issues"
+  },
+  "homepage": "https://rm0909.github.io/url-shortening-landing-page/"
+}
