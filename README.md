@@ -33,7 +33,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Frontend Mentor](https://your-solution-url.com)
-- Live Site URL: [Github pages](https://rm0909.github.io/url-shortening-landing-page/)
+- Live Site URL: [Github pages](https://url-shorter-rm0909.netlify.app//)
 
 ## My process
 
