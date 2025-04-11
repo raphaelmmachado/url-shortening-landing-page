@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor](https://your-solution-url.com)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/urlshorteninglandingpage-with-vanilla-js-and-tailwind-c0bksr8y74)
 - Live Site URL: [Github pages](https://url-shorter-rm0909.netlify.app//)
 
 ## My process
